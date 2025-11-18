@@ -249,7 +249,7 @@ export default function OswaldPortfolio() {
 
         {/* NOUVELLE SECTION : PARCOURS PROFESSIONNEL (TIMELINE) */}
         <section id="experience" className="mt-20">
-            <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">⏳ Parcours Professionnel Détaillé</motion.h2>
+            <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">Parcours Professionnel Détaillé</motion.h2>
             
             <div className="relative border-l border-emerald-500/50 space-y-10 pl-8">
                 {experienceTimeline.map((exp, index) => (
@@ -287,7 +287,7 @@ export default function OswaldPortfolio() {
 
         {/* SKILLS AMÉLIORÉES (avec Stacks) */}
         <section id="skills" className="mt-20">
-            <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">🎖️ Expertise Technique Détaillée</motion.h2>
+            <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">Expertise Technique Détaillée</motion.h2>
             <div className="grid md:grid-cols-3 gap-8">
                 
                 {/* 1. Barres de Compétences */}
@@ -326,7 +326,7 @@ export default function OswaldPortfolio() {
 
         {/* PROJECTS (Reste la même structure) */}
         <section id="projects" className="mt-20">
-          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">🏗️ Projets Clés</motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">Projets Clés</motion.h2>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={containerVariants} className="grid md:grid-cols-3 gap-8">
             {projects.map((p, index) => (
               <motion.article 
