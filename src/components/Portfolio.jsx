@@ -1,16 +1,14 @@
-import React, { useState } from "react"; // ⬅️ AJOUT de useState pour la gestion du formulaire
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-// Import des nouvelles icônes nécessaires pour la timeline
-import { Github, Linkedin, Mail, Download, Zap, Terminal, Code, Factory, Layers, Clock } from "lucide-react";
+import { 
+  Github, Linkedin, Mail, Download, Zap, Terminal, 
+  Code, Factory, Layers, Clock, Smartphone, Brain, Sparkles, ExternalLink 
+} from "lucide-react";
 
-// Variantes d'animation pour une meilleure réutilisation
+// --- CONFIGURATION DES ANIMATIONS ---
 const containerVariants = {
   hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
 const itemVariants = {
@@ -18,404 +16,262 @@ const itemVariants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-// DONNÉES EXTRAITES DU CV
+// --- DONNÉES ---
 const skills = [
-  { name: "Laravel / PHP", level: 97, icon: <Code size={18} /> },
-  { name: "Vue.js & Inertia", level: 92, icon: <Layers size={18} /> },
-  { name: "C# / JavaScript / react / Flutter", level: 90, icon: <Code size={18} /> },
-  { name: "Apriso (Delmia MES)", level: 95, icon: <Factory size={18} /> },
-  { name: "SQL & Data Modeling", level: 90, icon: <Code size={18} /> },
-  { name: "Node.js / APIs", level: 88, icon: <Terminal size={18} /> },
-  { name: "DevOps & Docker", level: 82, icon: <Zap size={18} /> },
-  { name: "Python", level: 80, icon: <Zap size={18} /> },
-];
-
-const methodologyStacks = [
-    {
-        title: "Architecture & Consulting",
-        icon: <Zap size={20} className="text-red-400" />,
-        items: ["Architecture DDD (Domain-Driven Design), Clean Code", "Modélisation BPMN (Analyse processus métier)", "Gestion des exigences technico-fonctionnelles"]
-    },
-    {
-        title: "DevOps & Qualité",
-        icon: <Terminal size={20} className="text-sky-400" />,
-        items: ["CI/CD avec GitHub/GitLab Actions, Déploiement automatisé", "Tests unitaires, d'intégration & E2E", "Administration réseaux et systèmes informatiques"]
-    },
-    {
-        title: "MES & Intégration Industrielle",
-        icon: <Factory size={20} className="text-emerald-400" />,
-        items: ["Expertise Apriso (Dassault Systèmes)", "Analyse de processus de production numériques", "Intégration ERP (SAP) et outils shopfloor"]
-    }
+  { name: "IA & LLM (Gemini/GPT)", level: 85, icon: <Brain size={18} className="text-purple-400" /> },
+  { name: "Laravel / PHP", level: 97, icon: <Code size={18} className="text-orange-400" /> },
+  { name: "Vue.js & Inertia", level: 92, icon: <Layers size={18} className="text-sky-400" /> },
+  { name: "Apriso (Delmia MES)", level: 95, icon: <Factory size={18} className="text-pink-400" /> },
+  { name: "C# / React / Flutter", level: 90, icon: <Code size={18} className="text-sky-400" /> },
+  { name: "SQL & Data Modeling", level: 90, icon: <Terminal size={18} /> },
+  { name: "Node.js / APIs / Python", level: 88, icon: <Terminal size={18} /> },
+  { name: "DevOps & Docker", level: 82, icon: <Zap size={18} className="text-yellow-400" /> },
 ];
 
 const experienceTimeline = [
     {
+        period: "Mars 2026 - Projet Phare",
+        title: "Concepteur & Dev Lead — FocusFlow AI",
+        company: "Projet Indépendant / R&D",
+        description: "Développement d'un assistant de productivité mobile hybride piloté par l'IA. Implémentation du Smart Scheduling via Groq et architecture Offline-First sécurisée.",
+        tags: ["Next.js", "Capacitor", "Grok AI", "Zustand"]
+    },
+    {
         period: "Depuis juillet 2024",
         title: "Consultant Manufacturing MES",
         company: "Brinure",
-        description: "Support MES (Apriso - Dassault Systèmes) pour divers clients industriels. Analyse, déploiement et optimisation des processus de production numériques. Collaboration avec les équipes techniques et métiers pour garantir la performance des systèmes.",
-        tags: ["Apriso", "MES", "Analyse Processus", "Brinure"]
+        description: "Support MES (Apriso) pour clients industriels (Safran Aero Système / TMA Safran Aero Système). Analyse et optimisation des processus shopfloor.",
+        tags: ["Apriso", "MES", "SAP Integration"]
     },
     {
-        //period: "Projet Clé",
+        period: "Projet Clé",
         title: "Lead Développeur - SmartCareCenter",
         company: "Brinure",
-        description: "Direction du projet de la conception à la version 1 et à la documentation technico-fonctionnelle. Supervision du développement Full-Stack, conception/administration BDD et intégration des modules.",
-        tags: ["Laravel", "Vue.js", "Lead Technique", "SQL", "Documentation"]
+        description: "Supervision du développement Full-Stack et documentation technico-fonctionnelle complète.",
+        tags: ["Laravel", "Vue.js", "SQL", "Lead Technique"]
     },
     {
         period: "2021 - 2024",
-        title: "Développeur Full-Stack / Téléconseiller",
+        title: "Développeur Full-Stack",
         company: "VIPP INTERSTIS BENIN",
-        description: "Développement et maintenance d'applications internes (Dialler Catarina, ERP de gestion Wipp). Gestion de bases de données, correction de bugs et ajout de fonctionnalités.",
-        tags: ["PHP", "ERP", "Maintenance", "Bases de Données"]
-    },
-    {
-        period: "2016 - 2019",
-        title: "Technicien Réseaux",
-        company: "ONG Rescue & Hope",
-        description: "Planification, câblage et maintenance des réseaux informatiques. Gestion du matériel et assistance technique aux utilisateurs.",
-        tags: ["Réseaux", "Maintenance", "IT Support"]
-    },
+        description: "Maintenance d'ERP internes et gestion de bases de données critiques.",
+        tags: ["PHP", "ERP", "Maintenance"]
+    }
 ];
-// --- FIN DES DONNÉES ---
 
-// Composant Portfolio
 export default function OswaldPortfolio() {
+  const [status, setStatus] = useState('');
   
   const projects = [
     {
-      title: "SmartCareCenter — Plateforme de gestion hospitalière",
-      desc: "Application fullstack (Laravel + Vue) pour gestion patients, planning, dossiers médicaux et statistiques. Amélioration de l'efficacité administrative.",
-      tags: ["Laravel", "Vue", "Inertia", "SQL", "SaaS"],
-      icon: "🏩",
+      title: "FocusFlow — Assistant IA Mobile",
+      desc: "App mobile hybride éliminant la fatigue décisionnelle grâce au Smart Scheduling et à la capture vocale intelligente via Groq AI.",
+      tags: ["Groq AI", "Capacitor", "Next.js", "Offline-First"],
+      isHighlight: true,
+      github: "https://github.com/Oswald-LEXPERT/focus-flow"
     },
     {
-      title: "SmartMonitoring — Supervision mini-centrales solaires",
-      desc: "Système d'acquisition CSV capteurs, analyse temps réel, alerting et historisation. Infrastructure Big Data légère pour 100+ sites.",
-      tags: ["API", "Scheduler", "Reporting", "IoT"],
-      icon: "💡",
+      title: "SmartCareCenter — Gestion Hospitalière",
+      desc: "Plateforme SaaS complète pour la gestion administrative et médicale des patients (Laravel + Vue).",
+      tags: ["Laravel", "Inertia", "SQL"],
     },
     {
-      title: "Apriso Integrations — MES Customization",
-      desc: "Conception de workflows Apriso complexes, intégration bidirectionnelle ERP (SAP) & outils shopfloor. Optimisation des temps de cycle de 15%.",
-      tags: ["Apriso", "Integration", "MES", "Manufacturing"],
-      icon: "⚙️",
-    },
+      title: "SmartMonitoring — Solaire IoT",
+      desc: "Supervision temps réel de 100+ mini-centrales solaires avec alerting automatique.",
+      tags: ["API", "IoT", "Big Data"],
+      demo: "https://smart-monitoring-iot.vercel.app/" // TON LIEN ICI
+    }
   ];
 
-  // 🆕 CORRECTION : Ajout de l'état pour la gestion du menu mobile
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  // 🚀 LOGIQUE DE GESTION DU FORMULAIRE FORMULAIRE
-    const [status, setStatus] = useState('');
-    
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setStatus('sending'); 
-
-        const form = e.target;
-        const data = new FormData(form);
-        const object = {};
-        data.forEach((value, key) => {
-            object[key] = value;
-        });
-        const json = JSON.stringify(object);
-
-        // ⚠️ ID Formspree basé sur l'URL fournie : https://formspree.io/f/mkgkekdg
-        const formspreeUrl = "https://formspree.io/f/mkgkekdg"; 
-
-        try {
-            const response = await fetch(formspreeUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: json,
-            });
-
-            if (response.ok) {
-                setStatus('success'); 
-                form.reset(); 
-            } else {
-                setStatus('error'); 
-                console.error('Erreur lors de l\'envoi:', response.statusText);
-            }
-        } catch (error) {
-            setStatus('error');
-            console.error('Erreur réseau:', error);
-        }
-    };
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+    const data = new FormData(e.target);
+    const object = Object.fromEntries(data.entries());
+    try {
+      const response = await fetch("https://formspree.io/f/mkgkekdg", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(object),
+      });
+      if (response.ok) { setStatus('success'); e.target.reset(); } 
+      else { setStatus('error'); }
+    } catch { setStatus('error'); }
+  };
 
   return (
-    <div className="min-h-screen w-screen bg-slate-950 text-slate-100 antialiased overflow-x-hidden">
+    <div className="min-h-screen w-screen bg-slate-950 text-slate-100 antialiased overflow-x-hidden selection:bg-emerald-500/30">
       
-      {/* HEADER AMÉLIORÉ */}
+      {/* HEADER */}
       <header className="sticky top-0 z-40 backdrop-blur-md bg-slate-950/80 border-b border-emerald-400/20">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-sky-500 flex items-center justify-center shadow-2xl shadow-emerald-500/30"> 
-              <span className="font-extrabold text-lg text-slate-900">OA</span>
-            </div>
-            <div>
-              <div className="text-lg font-semibold text-white">Oswald ADINAVO</div>
-              <div className="text-xs text-slate-400">Consultant Manufacturing MES (Apriso) | Développeur Full-Stack </div>
+            <div className="w-10 h-10 rounded-lg bg-emerald-500 flex items-center justify-center font-bold text-slate-900 shadow-lg shadow-emerald-500/20">OA</div>
+            <div className="hidden sm:block">
+              <div className="text-sm font-bold tracking-tight">Oswald ADINAVO</div>
+              <div className="text-[10px] text-slate-400 uppercase tracking-widest">Analyste Programmeur Développeur</div>
             </div>
           </div>
-
-          <div className="hidden md:flex items-center gap-6">
-            <a href="#experience" className="text-sm font-medium hover:text-emerald-400 transition">Parcours</a>
-            <a href="#skills" className="text-sm font-medium hover:text-emerald-400 transition">Expertise</a>
-            <a href="#projects" className="text-sm font-medium hover:text-emerald-400 transition">Projets</a>
-            <a href="#contact" className="text-sm font-medium hover:text-emerald-400 transition">Contact</a>
-            <a 
-                href="/CV_Oswald_Adinavo_2025.pdf" 
-                download="CV_Oswald_Adinavo_2025.pdf" // ⬅️ Attribut 'download' conservé pour le téléchargement
-                className="ml-4 inline-flex items-center gap-2 rounded-full px-4 py-2 bg-emerald-500/90 text-slate-900 font-semibold shadow-xl hover:bg-emerald-400 transition transform hover:scale-105"
-            >
-              <Download size={18} /> <span className="text-sm">Télécharger CV</span>
+          <div className="flex items-center gap-6 text-sm font-medium">
+            <a href="#experience" className="hover:text-emerald-400 transition">Parcours</a>
+            <a href="#projects" className="hover:text-emerald-400 transition">Projets</a>
+            <a href="#contact" className="hidden sm:block hover:text-emerald-400 transition">Contact</a>
+            <a href="/CV_Oswald_Adinavo_2025.pdf" download className="bg-emerald-500 px-4 py-2 rounded-full text-slate-900 hover:bg-emerald-400 transition flex items-center gap-2 text-xs font-bold">
+              <Download size={14} /> CV
             </a>
           </div>
         </nav>
       </header>
 
-      {/* mobile CV button placed before hero (visible on mobile only) */}
-{!mobileMenuOpen && (
-<div className="md:hidden flex justify-center py-3 bg-slate-900/60 border-b border-white/5">
-<a href="/CV_Oswald_Adinavo_2025.pdf" download="CV_Oswald_Adinavo_2025.pdf" className="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-emerald-500/90 text-slate-900 font-semibold shadow-md">
-<Download size={16} /> Voir le CV
-</a>
-</div>
-)}
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <main className="max-w-7xl mx-auto px-4 py-12">
         
-        {/* HERO - AFFINÉ */}
-        <section className="relative overflow-hidden pt-10 pb-20">
-            <div className="absolute inset-0 z-0 opacity-50">
-                <div className="w-96 h-96 rounded-full bg-emerald-500/10 absolute -top-10 -left-10 blur-[100px]" />
-                <div className="w-96 h-96 rounded-full bg-sky-500/10 absolute -bottom-10 -right-10 blur-[100px]" />
-            </div>
-
-            <motion.div 
-                className="relative z-10 grid lg:grid-cols-12 gap-10 items-center"
-                initial="hidden"
-                animate="show"
-                variants={containerVariants}
-            >
-                <div className="lg:col-span-7">
-                    <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-extrabold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-sky-400">
-                        Oswald ADINAVO
-                    </motion.h1>
-                    <motion.p variants={itemVariants} className="mt-4 text-2xl text-slate-300 max-w-xl font-light">
-                        Consultant Manufacturing & Développeur Full-Stack
-                    </motion.p>
-                    <motion.p variants={itemVariants} className="mt-4 text-lg text-slate-400 max-w-xl">
-                        Spécialisé dans le MES (Apriso – Dassault Systèmes), j’accompagne les projets industriels en apportant des solutions digitales fiables et adaptées aux besoins du terrain. J’interviens avec une approche collaborative et orientée performance, pour transformer les exigences opérationnelles en outils concrets et efficaces.
-                    </motion.p>
-
-                    <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-4">
-                        <a href="#contact" className="rounded-full px-6 py-3 bg-emerald-500 text-slate-900 font-bold shadow-md shadow-emerald-500/40 hover:scale-[1.03] transition transform duration-300">Démarrer une collaboration</a>
-                        <a href="#experience" className="rounded-full px-6 py-3 border border-white/20 text-slate-200 font-medium hover:bg-white/10 transition">Mon parcours</a>
-                    </motion.div>
-
-                    <motion.div variants={itemVariants} className="mt-8 flex gap-6 items-center text-slate-400">
-                        <a href="https://github.com/Oswald-LEXPERT" target="_blank" aria-label="GitHub" className="hover:text-emerald-400 transition"><Github size={24} /></a>
-                        <a href="https://www.linkedin.com/in/oswald-adinavo-07a8172b9/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BbceDRefKT2irLJSeFFzC4w%3D%3D" target="_blank" aria-label="LinkedIn" className="hover:text-emerald-400 transition"><Linkedin size={24} /></a>
-                        <a href="mailto:oswald.adinavo@gmail.com" aria-label="Email" className="hover:text-emerald-400 transition"><Mail size={24} /></a>
-                    </motion.div>
-                </div>
-                
-                {/* Bloc de droite (image/mission) */}
-                <motion.div variants={itemVariants} className="lg:col-span-5 relative">
-                    <div className="rounded-3xl bg-slate-800/60 p-6 backdrop-blur-md border border-emerald-400/20 shadow-2xl">
-                           <div className="w-full h-full rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-                              <img 
-                                 src="/images/ppp.png" 
-                                 alt="Portrait professionnel d'Oswald ADINAVO" 
-                                 className="w-full h-full object-cover" // Ajustement de la hauteur pour correspondre à l'ancienne structure
-                               />
-                           </div>
-                         <div className="mt-5">
-                             <div className="text-sm font-bold text-emerald-400">Mission & Vision</div>
-                             <div className="text-slate-200 mt-2 leading-relaxed">Je conçois des applications métier et j’assure le support opérationnel des systèmes shopfloor. J’optimise, je debug et fait évoluer ces solutions terrain pour renforcer la performance industrielle et offrir aux utilisateurs une expérience fluide, fiable et adaptée à leurs besoins.</div>
-                         </div>
-                    </div>
-                </motion.div>
-
+        {/* HERO */}
+        <section className="py-20 text-center lg:text-left grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div initial="hidden" animate="show" variants={containerVariants}>
+            <motion.div variants={itemVariants} className="inline-block px-3 py-1 rounded-full border border-emerald-500/30 text-emerald-400 text-[10px] font-bold mb-4 uppercase tracking-wider">
+              Disponible pour de nouveaux défis IA & MES
             </motion.div>
-        </section>
-
-        {/* NOUVELLE SECTION : PARCOURS PROFESSIONNEL (TIMELINE) */}
-        <section id="experience" className="mt-20">
-            <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">Parcours Professionnel Détaillé</motion.h2>
-            
-            <div className="relative border-l border-emerald-500/50 space-y-10 pl-8">
-                {experienceTimeline.map((exp, index) => (
-                    <motion.div 
-                        key={index}
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        //viewport={{ once: true, amount: 0.5 }}
-                        transition={{ duration: 2.5 }}
-                        className="relative"
-                    >
-                        <motion.div
-                            
-                            transition={{ type: "spring", stiffness: 400 }}
-                            className="rounded-xl bg-slate-800/70 p-6 shadow-2xl hover:bg-slate-800 transition cursor-pointer"
-                        >
-                            <div className="text-xs font-semibold uppercase text-emerald-400 tracking-wider mb-2">{exp.period}</div>
-                            <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
-                            <div className="text-md font-medium text-sky-300">{exp.company}</div>
-                            <p className="mt-3 text-slate-400 text-sm leading-relaxed">{exp.description}</p>
-                            <div className="mt-4 flex flex-wrap gap-2">
-                                {exp.tags.map((t) => (
-                                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-white/10 text-slate-300 font-medium">{t}</span>
-                                ))}
-                            </div>
-                        </motion.div>
-                        {/* Point de la timeline */}
-                        <div className="absolute -left-[45px] top-0 w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg border-4 border-slate-950">
-                            <Clock size={16} className="text-slate-900" />
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
-        </section>
-
-        {/* SKILLS AMÉLIORÉES (avec Stacks) */}
-        <section id="skills" className="mt-20">
-            <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">Expertise Technique Détaillée</motion.h2>
-            <div className="grid md:grid-cols-3 gap-8">
-                
-                {/* 1. Barres de Compétences */}
-                <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={containerVariants} className="md:col-span-2 space-y-5">
-                    <h3 className="text-xl font-semibold text-emerald-400">Langages & Frameworks Clés</h3>
-                    {skills.map((s, index) => (
-                        <motion.div key={s.name} variants={itemVariants} className="bg-slate-800/70 rounded-xl p-5 shadow-lg border border-white/5 hover:border-emerald-400/40 transition duration-500">
-                            <div className="flex justify-between items-center">
-                                <div className="text-lg font-medium flex items-center gap-3">{s.icon} {s.name}</div>
-                                <div className="text-sm text-emerald-400 font-bold">{s.level}%</div>
-                            </div>
-                            <div className="mt-3 h-2 bg-white/10 rounded-full overflow-hidden">
-                                <motion.div initial={{ width: 0 }} whileInView={{ width: `${s.level}%` }} viewport={{ once: true }} transition={{ duration: 1.5, delay: index * 0.1 }} className="h-full rounded-full bg-gradient-to-r from-sky-400 to-emerald-400" />
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                {/* 2. Stacks de Méthodologie (Plus structuré) */}
-                <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={containerVariants} className="space-y-6 self-start">
-                    <h3 className="text-xl font-semibold text-emerald-400">Méthodes & Outils</h3>
-                    {methodologyStacks.map((stack, index) => (
-                        <motion.div key={stack.title} variants={itemVariants} className="rounded-xl bg-slate-800/70 p-5 border border-white/10 shadow-lg hover:shadow-emerald-500/10 transition">
-                            <div className="flex items-center gap-3 mb-3">
-                                {stack.icon}
-                                <div className="font-bold text-white">{stack.title}</div>
-                            </div>
-                            <ul className="text-sm text-slate-400 space-y-1 list-disc pl-5">
-                                {stack.items.map((item, i) => <li key={i}>{item}</li>)}
-                            </ul>
-                        </motion.div>
-                    ))}
-                </motion.div>
-            </div>
-        </section>
-
-        {/* PROJECTS (Reste la même structure) */}
-        <section id="projects" className="mt-20">
-          <motion.h2 initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-4xl font-bold mb-10 border-b border-emerald-400/20 pb-4">Projets Clés</motion.h2>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={containerVariants} className="grid md:grid-cols-3 gap-8">
-            {projects.map((p, index) => (
-              <motion.article 
-                key={p.title} 
-                variants={itemVariants}
-                whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(16, 185, 129, 0.25)" }} 
-                transition={{ type: "spring", stiffness: 300 }}
-                className="rounded-2xl bg-slate-800/70 p-6 border border-white/5 hover:border-emerald-400/40 shadow-xl cursor-pointer"
-              >
-                <div className="text-4xl mb-4">{p.icon}</div>
-                <div className="text-xl font-bold text-white">{p.title}</div>
-                <div className="mt-3 text-sm text-slate-400">{p.desc}</div>
-                
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {p.tags.map((t) => (
-                    <span key={t} className="text-xs px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-300 font-medium">{t}</span>
-                  ))}
-                </div>
-                <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
-                  <a className="text-sm font-semibold underline text-emerald-400/90 hover:text-emerald-400 transition" href="#">En savoir plus</a>
-                  <a href="#contact" className="text-sm rounded-full px-4 py-1.5 bg-sky-500/90 text-slate-900 font-semibold hover:bg-sky-400 transition">Contact</a>
-                </div>
-              </motion.article>
-            ))}
-          </motion.div>
-        </section>
-
-        {/* CONTACT (MISE À JOUR FORMULAIRE) */}
-        <section id="contact" className="mt-24 mb-20 grid md:grid-cols-2 gap-10">
-          
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.8 }} 
-            className="rounded-2xl bg-slate-800/70 p-8 border border-emerald-400/20 shadow-2xl"
-          >
-            <h3 className="text-3xl font-bold text-emerald-400">Connectons-nous</h3>
-            <p className="mt-3 text-lg text-slate-300">Vous avez un défi MES, un projet d'intégration ou vous recherchez une expertise Full-Stack industrielle ? Échangeons.</p>
-
-            <div className="mt-6 space-y-4 text-slate-200">
-              <div className="flex items-center gap-4 text-lg"><Mail size={20} className="text-sky-400" /> oswald.adinavo@gmail.com</div>
-              <div className="flex items-center gap-4 text-lg"><Linkedin size={20} className="text-sky-400" /> linkedin.com/in/Oswald ADINAVO</div>
-              <div className="flex items-center gap-4 text-lg"><Github size={20} className="text-sky-400" /> github.com/Oswald-LEXPERT</div>
-            </div>
-
-            <div className="mt-8">
-              <a href="mailto:oswald.adinavo@gmail.com" className="inline-flex items-center gap-3 rounded-full px-6 py-3 bg-emerald-500 text-slate-900 font-bold shadow-xl hover:bg-emerald-400 transition">
-                <Mail size={20} /> Envoyer un email
-              </a>
-            </div>
-          </motion.div>
-
-          {/* FORMULAIRE CORRIGÉ POUR ENVOI JSON */}
-          <motion.form
-            onSubmit={handleSubmit} // ⬅️ Utilisation du gestionnaire de soumission React
-            // REMOVED action="url" et method="POST"
-            initial={{ opacity: 0, x: 50 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.8 }} 
-            className="rounded-2xl bg-slate-800/70 p-8 border border-white/5 shadow-2xl"
-          >
-            <h3 className="text-3xl font-bold text-white">Un message rapide</h3>
-            <div className="mt-5 grid gap-4">
-                {/* ⬅️ Ajout de l'attribut 'name' et gestion de l'état */}
-              <input name="name" className="rounded-lg bg-white/10 border border-white/10 p-3 text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-emerald-400 outline-none transition" placeholder="Nom Complet" required disabled={status === 'sending'} />
-              <input type="email" name="email" className="rounded-lg bg-white/10 border border-white/10 p-3 text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-emerald-400 outline-none transition" placeholder="Email Professionnel" required disabled={status === 'sending'} />
-              <textarea name="message" className="rounded-lg bg-white/10 border border-white/10 p-3 text-slate-100 placeholder-slate-400 focus:ring-2 focus:ring-emerald-400 outline-none transition" rows={4} placeholder="Votre message..." required disabled={status === 'sending'} />
-
-                {/* Affichage du statut */}
-                {status === 'success' && <p className="text-emerald-400 font-semibold">Message envoyé avec succès ! Je vous répondrai rapidement.</p>}
-                {status === 'error' && <p className="text-red-400 font-semibold">Une erreur est survenue lors de l'envoi. Veuillez réessayer ou utiliser l'email direct.</p>}
-
-              <div className="flex justify-end">
-                <button 
-                    type="submit" 
-                    className="rounded-full px-6 py-3 bg-sky-500 text-slate-900 font-bold hover:bg-sky-400 transition"
-                    disabled={status === 'sending'}
-                >
-                    {status === 'sending' ? 'Envoi...' : 'Envoyer le message'}
-                </button>
+            <motion.h1 variants={itemVariants} className="text-5xl lg:text-7xl font-black mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-slate-500 leading-tight">
+              Concevoir le futur de l'Industrie.
+            </motion.h1>
+            <motion.p variants={itemVariants} className="text-xl text-slate-400 mb-8 max-w-xl leading-relaxed">
+              Analyste Programmeur spécialisé dans l'intégration de solutions MES (Apriso) et le développement d'applications Full-Stack augmentées par l'IA.
+            </motion.p>
+            <motion.div variants={itemVariants} className="flex flex-wrap justify-center lg:justify-start gap-4">
+              <a href="#projects" className="bg-white text-slate-950 px-8 py-3 rounded-xl font-bold hover:bg-emerald-400 transition shadow-xl">Voir mes projets</a>
+              <div className="flex gap-4 items-center px-4 border-l border-slate-800 ml-4">
+                <a href="https://github.com/Oswald-LEXPERT" target="_blank" className="text-slate-400 hover:text-white transition"><Github /></a>
+                <a href="https://linkedin.com/in/oswald-adinavo-07a8172b9/" target="_blank" className="text-slate-400 hover:text-white transition"><Linkedin /></a>
               </div>
-            </div>
-          </motion.form>
+            </motion.div>
+          </motion.div>
+          <motion.div initial={{opacity:0, scale:0.8}} animate={{opacity:1, scale:1}} className="relative">
+             <div className="absolute inset-0 bg-emerald-500/20 blur-[120px] rounded-full" />
+             <img src="/images/ppp.png" alt="Oswald" className="relative z-10 w-80 h-80 lg:w-[450px] lg:h-[450px] object-cover rounded-3xl grayscale hover:grayscale-0 transition duration-500 border border-white/10 mx-auto shadow-2xl" />
+          </motion.div>
         </section>
 
-        <footer className="text-center text-sm text-slate-500 py-10 border-t border-white/10 mt-10">
-          <p>© {new Date().getFullYear()} Oswald ADINAVO — Développeur & Consultant MES. </p>
+        {/* PROJECTS SECTION */}
+        <section id="projects" className="py-20">
+          <h2 className="text-3xl font-bold mb-12 flex items-center gap-4 uppercase tracking-tighter">
+            <span className="w-12 h-[1px] bg-emerald-500" /> Projets Sélectionnés
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((p, i) => (
+              <motion.div 
+                key={i} 
+                whileHover={{ y: -10 }}
+                className={`p-8 rounded-3xl border ${p.isHighlight ? 'border-emerald-500/50 bg-emerald-500/5 shadow-lg shadow-emerald-500/5' : 'border-white/10 bg-slate-900/50'} flex flex-col justify-between`}
+              >
+                <div>
+                  <div className="text-4xl mb-6">{p.icon}</div>
+                  <h3 className="text-2xl font-bold mb-4 italic leading-tight">{p.title}</h3>
+                  <p className="text-slate-400 text-sm mb-6 leading-relaxed">{p.desc}</p>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {p.tags.map(t => <span key={t} className="text-[9px] font-bold px-2 py-1 rounded-md bg-white/5 text-slate-300 uppercase tracking-widest">{t}</span>)}
+                  </div>
+                </div>
+                <div className="mt-auto pt-6 flex items-center justify-between border-t border-white/5">
+                  {p.github ? (
+                    <a 
+                      href={p.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-emerald-400 font-bold text-xs hover:text-emerald-300 transition"
+                    >
+                      <Github size={16} /> Code Source
+                    </a>
+                  ) : (
+                    <div className="flex items-center gap-2 text-slate-500 text-[10px] italic font-medium uppercase tracking-tighter">
+                      <Zap size={12} className="text-slate-600" /> 
+                      Propriétaire
+                    </div>
+                  )}
+                  
+                  {p.demo ? (
+                    <a 
+                      href={p.demo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      title="Voir la démo live"
+                      className="p-2.5 rounded-full bg-emerald-500 text-slate-900 hover:bg-emerald-400 transition-all shadow-lg shadow-emerald-500/20"
+                    >
+                      <ExternalLink size={18}/>
+                    </a>
+                  ) : (
+                    <a 
+                      href="#contact" 
+                      title="Demander plus d'infos"
+                      className="p-2.5 rounded-full bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 transition-all"
+                    >
+                      <ExternalLink size={18}/>
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* SKILLS & TIMELINE */}
+        <section className="py-20 grid lg:grid-cols-2 gap-20">
+          <div id="skills">
+            <h3 className="text-2xl font-bold mb-8 flex items-center gap-2 text-emerald-400 italic">
+               <Terminal size={20}/> Stack Technique
+            </h3>
+            <div className="space-y-6">
+              {skills.map(s => (
+                <div key={s.name}>
+                  <div className="flex justify-between text-sm mb-2 font-medium">
+                    <span className="flex items-center gap-2">{s.icon} {s.name}</span>
+                    <span className="text-slate-500">{s.level}%</span>
+                  </div>
+                  <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden">
+                    <motion.div initial={{width:0}} whileInView={{width:`${s.level}%`}} className="h-full bg-emerald-500" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div id="experience">
+            <h3 className="text-2xl font-bold mb-8 flex items-center gap-2 text-sky-400 italic">
+               <Clock size={20}/> Chronologie
+            </h3>
+            <div className="border-l-2 border-slate-900 ml-4 space-y-12">
+              {experienceTimeline.map((exp, i) => (
+                <div key={i} className="relative pl-8">
+                  <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-900 border-2 border-emerald-500" />
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">{exp.period}</span>
+                  <h4 className="text-lg font-bold text-white mt-1 italic">{exp.title}</h4>
+                  <p className="text-sky-400 text-sm mb-2 font-medium">{exp.company}</p>
+                  <p className="text-slate-400 text-xs leading-relaxed">{exp.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="py-20 border-t border-white/5">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-6 italic tracking-tight">Prêt à collaborer ?</h2>
+            <p className="text-slate-400 mb-12">Je suis ouvert aux opportunités en Manufacturing IT (MES) et au développement d'applications Full-Stack innovantes.</p>
+            <form onSubmit={handleSubmit} className="grid gap-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <input name="name" placeholder="Nom" required className="bg-slate-900 border border-white/10 rounded-xl p-4 focus:border-emerald-500 outline-none transition text-sm" />
+                <input name="email" type="email" placeholder="Email" required className="bg-slate-900 border border-white/10 rounded-xl p-4 focus:border-emerald-500 outline-none transition text-sm" />
+              </div>
+              <textarea name="message" placeholder="Votre message..." rows={5} required className="bg-slate-900 border border-white/10 rounded-xl p-4 focus:border-emerald-500 outline-none transition text-sm" />
+              <button disabled={status==='sending'} className="bg-emerald-500 text-slate-950 font-black py-4 rounded-xl hover:bg-emerald-400 transition uppercase tracking-widest text-xs">
+                {status === 'sending' ? 'Envoi en cours...' : 'Envoyer le message'}
+              </button>
+              {status === 'success' && <p className="text-emerald-400 text-sm mt-2 font-medium">Message reçu ! Je vous recontacte très vite.</p>}
+            </form>
+          </div>
+        </section>
+
+        <footer className="py-10 text-center text-slate-600 text-xs border-t border-white/5 mt-20">
+          <p>© {new Date().getFullYear()} — Oswald ADINAVO. Code Clean, Pensée Agile.</p>
         </footer>
       </main>
     </div>
