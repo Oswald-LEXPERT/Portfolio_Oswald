@@ -1,7 +1,7 @@
 import React, { useState } from "react"; // ⬅️ AJOUT de useState pour la gestion du formulaire
 import { motion } from "framer-motion";
 // Import des nouvelles icônes nécessaires pour la timeline
-import { Github, Linkedin, Mail, Download, Zap, Terminal, Code, Factory, Layers, Clock } from "lucide-react";
+import { Github, Linkedin, Phone, Mail, Download, Zap, Terminal, Code, Factory, Layers, Clock, Sparkles } from "lucide-react";
 
 // Variantes d'animation pour une meilleure réutilisation
 const containerVariants = {
@@ -49,11 +49,18 @@ const methodologyStacks = [
 ];
 
 const experienceTimeline = [
+ {
+    period: "Janvier 2026",
+    title: "Administrateur réseaux informatiques",
+    company: "Brinure",
+    description: "Administration, supervision et maintenance des infrastructures réseaux. Configuration et gestion des équipements réseau (routeurs, switches, firewalls) et support aux utilisateurs. Mise en place de solutions de connectivité fiables, sécurisation des accès et résolution des incidents afin d’assurer la continuité de service et la performance du réseau.",
+    tags: ["Cisco", "Winbox", "Réseaux", "Routing", "Switching", "Firewall", "Support IT"]
+},
     {
         period: "Depuis juillet 2024",
         title: "Consultant Manufacturing MES",
         company: "Brinure",
-        description: "Support MES (Apriso - Dassault Systèmes) pour divers clients industriels. Analyse, déploiement et optimisation des processus de production numériques. Collaboration avec les équipes techniques et métiers pour garantir la performance des systèmes.",
+        description: "Support MES (Apriso - Dassault Systèmes) sur la Tierce Maintenance Applicative (TMA) pour Safran Aerosystems sur le projet SAO. Analyse, déploiement et optimisation des processus de production numériques. Collaboration avec les équipes techniques et métiers pour garantir la performance des systèmes.",
         tags: ["Apriso", "MES", "Analyse Processus", "Brinure"]
     },
     {
@@ -63,6 +70,13 @@ const experienceTimeline = [
         description: "Direction du projet de la conception à la version 1 et à la documentation technico-fonctionnelle. Supervision du développement Full-Stack, conception/administration BDD et intégration des modules.",
         tags: ["Laravel", "Vue.js", "Lead Technique", "SQL", "Documentation"]
     },
+    {
+    period: "Mars 2024",
+    title: "Analyste & Concepteur — FocusFlow AI",
+    company: "Projet Personnel / R&D",
+    description: "Conception intégrale d'un assistant de productivité 'Offline-First'. Architecture d'un moteur de planification intelligente exploitant Groq pour l'automatisation des tâches et la capture contextuelle vocale.",
+    tags: ["Next.js", "Capacitor", "GROQ", "Zustand", "UX/UI"]
+},
     {
         period: "2021 - 2024",
         title: "Développeur Full-Stack / Téléconseiller",
@@ -85,22 +99,37 @@ export default function OswaldPortfolio() {
   
   const projects = [
     {
-      title: "SmartCareCenter — Plateforme de gestion hospitalière",
-      desc: "Application fullstack (Laravel + Vue) pour gestion patients, planning, dossiers médicaux et statistiques. Amélioration de l'efficacité administrative.",
-      tags: ["Laravel", "Vue", "Inertia", "SQL", "SaaS"],
-      icon: "🏩",
-    },
+  title: "SmartCareCenter — Système de Gestion Hospitalière",
+  desc: "Solution métier complète orchestrant la gestion des dossiers patients, le planning médical complexe et le suivi statistique. Architecture robuste conçue pour optimiser les flux administratifs critiques.",
+  tags: ["Laravel 11", "Vue.js 3", "Inertia", "PostgreSQL", "Architecture SaaS"],
+  //icon: "🏥",
+  github: null, // Propriétaire
+    link: "#contact" // Redirige vers contact
+},
+{
+  title: "FocusFlow — Assistant de Productivité IA",
+  desc: "Application mobile hybride utilisant l'IA pour le Smart Scheduling et la capture vocale contextuelle. Architecture 'Offline-First' garantissant performance et confidentialité des données utilisateur.",
+  tags: ["Next.js 14", "Capacitor", "Groq", "Zustand", "Tailwind"],
+  //icon: <Sparkles className="text-purple-400" />, // Utilise l'icône Sparkles pour l'effet "IA"
+  isHighlight: true, // Pour activer le style spécial (bordure émeraude)
+  github: "https://github.com/Oswald-LEXPERT",
+  link: "#contact"
+},
     {
       title: "SmartMonitoring — Supervision mini-centrales solaires",
       desc: "Système d'acquisition CSV capteurs, analyse temps réel, alerting et historisation. Infrastructure Big Data légère pour 100+ sites.",
       tags: ["API", "Scheduler", "Reporting", "IoT"],
-      icon: "💡",
+      //icon: "💡",
+      github: "https://smart-monitoring-iot.vercel.app/",
+      link: "#contact"
     },
     {
       title: "Apriso Integrations — MES Customization",
-      desc: "Conception de workflows Apriso complexes, intégration bidirectionnelle ERP (SAP) & outils shopfloor. Optimisation des temps de cycle de 15%.",
+      desc: "Conception de workflows Apriso complexes, intégration bidirectionnelle ERP (SAP) & outils shopfloor. Optimisation des temps de cycle.",
       tags: ["Apriso", "Integration", "MES", "Manufacturing"],
-      icon: "⚙️",
+      //icon: "⚙️",
+      github: null, // Propriétaire
+    link: "#contact" // Redirige vers contact
     },
   ];
 
@@ -170,8 +199,8 @@ export default function OswaldPortfolio() {
             <a href="#projects" className="text-sm font-medium hover:text-emerald-400 transition">Projets</a>
             <a href="#contact" className="text-sm font-medium hover:text-emerald-400 transition">Contact</a>
             <a 
-                href="/CV_Oswald_Adinavo_2025.pdf" 
-                download="CV_Oswald_Adinavo_2025.pdf" // ⬅️ Attribut 'download' conservé pour le téléchargement
+                href="/CV_Oswald_Adinavo_2026_Pro.pdf" 
+                download="CV_Oswald_Adinavo_2026_Pro.pdf" // ⬅️ Attribut 'download' conservé pour le téléchargement
                 className="ml-4 inline-flex items-center gap-2 rounded-full px-4 py-2 bg-emerald-500/90 text-slate-900 font-semibold shadow-xl hover:bg-emerald-400 transition transform hover:scale-105"
             >
               <Download size={18} /> <span className="text-sm">Télécharger CV</span>
@@ -183,7 +212,7 @@ export default function OswaldPortfolio() {
       {/* mobile CV button placed before hero (visible on mobile only) */}
 {!mobileMenuOpen && (
 <div className="md:hidden flex justify-center py-3 bg-slate-900/60 border-b border-white/5">
-<a href="/CV_Oswald_Adinavo_2025.pdf" download="CV_Oswald_Adinavo_2025.pdf" className="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-emerald-500/90 text-slate-900 font-semibold shadow-md">
+<a href="/CV_Oswald_Adinavo_2026_Pro.pdf" download="CV_Oswald_Adinavo_2026_Pro.pdf" className="inline-flex items-center gap-2 rounded-full px-4 py-2 bg-emerald-500/90 text-slate-900 font-semibold shadow-md">
 <Download size={16} /> Voir le CV
 </a>
 </div>
@@ -212,7 +241,7 @@ export default function OswaldPortfolio() {
                         Consultant Manufacturing & Développeur Full-Stack
                     </motion.p>
                     <motion.p variants={itemVariants} className="mt-4 text-lg text-slate-400 max-w-xl">
-                        Spécialisé dans le MES (Apriso – Dassault Systèmes), j’accompagne les projets industriels en apportant des solutions digitales fiables et adaptées aux besoins du terrain. J’interviens avec une approche collaborative et orientée performance, pour transformer les exigences opérationnelles en outils concrets et efficaces.
+                        Spécialisé dans le MES (Apriso – Dassault Systèmes), j’accompagne la transformation digitale des environnements industriels en concevant des solutions fiables, adaptées aux réalités du terrain. Mon approche allie collaboration, pragmatisme et performance, pour transformer les exigences opérationnelles en outils concrets et efficaces.
                     </motion.p>
 
                     <motion.div variants={itemVariants} className="mt-8 flex flex-wrap gap-4">
@@ -239,7 +268,7 @@ export default function OswaldPortfolio() {
                            </div>
                          <div className="mt-5">
                              <div className="text-sm font-bold text-emerald-400">Mission & Vision</div>
-                             <div className="text-slate-200 mt-2 leading-relaxed">Je conçois des applications métier et j’assure le support opérationnel des systèmes shopfloor. J’optimise, je debug et fait évoluer ces solutions terrain pour renforcer la performance industrielle et offrir aux utilisateurs une expérience fluide, fiable et adaptée à leurs besoins.</div>
+                             <div className="text-slate-200 mt-2 leading-relaxed">Je conçois des applications métier et assure le support opérationnel des systèmes shopfloor. J’optimise, corrige et fais évoluer ces solutions terrain afin de renforcer la performance industrielle et d’offrir aux utilisateurs une expérience fluide, fiable et adaptée à leurs besoins.</div>
                          </div>
                     </div>
                 </motion.div>
@@ -345,10 +374,32 @@ export default function OswaldPortfolio() {
                     <span key={t} className="text-xs px-3 py-1 rounded-full bg-emerald-400/20 text-emerald-300 font-medium">{t}</span>
                   ))}
                 </div>
-                <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
-                  <a className="text-sm font-semibold underline text-emerald-400/90 hover:text-emerald-400 transition" href="#">En savoir plus</a>
-                  <a href="#contact" className="text-sm rounded-full px-4 py-1.5 bg-sky-500/90 text-slate-900 font-semibold hover:bg-sky-400 transition">Contact</a>
-                </div>
+                <div className="mt-5 pt-4 border-t border-white/10 flex flex-col gap-3">
+  {/* Message discret pour les projets d'entreprise sans GitHub */}
+  {!p.github && (
+    <div className="text-[10px] text-slate-500 italic flex items-center gap-1">
+      <Zap size={10} className="text-slate-600" /> Projet Entreprise (Code Propriétaire)
+    </div>
+  )}
+
+  <div className="flex items-center justify-between">
+    <a 
+      className="text-sm font-semibold underline text-emerald-400/90 hover:text-emerald-400 transition" 
+      href={p.github || p.link || "#contact"}
+      target={(p.github?.startsWith('http') || p.link?.startsWith('http')) ? "_blank" : "_self"}
+      rel="noopener noreferrer"
+    >
+      {p.github ? "Voir le projet" : "En savoir plus"}
+    </a>
+    
+    <a 
+      href="#contact" 
+      className="text-sm rounded-full px-4 py-1.5 bg-sky-500/90 text-slate-900 font-semibold hover:bg-sky-400 transition"
+    >
+      Contact
+    </a>
+  </div>
+</div>
               </motion.article>
             ))}
           </motion.div>
@@ -358,27 +409,51 @@ export default function OswaldPortfolio() {
         <section id="contact" className="mt-24 mb-20 grid md:grid-cols-2 gap-10">
           
           <motion.div 
-            initial={{ opacity: 0, x: -50 }} 
-            whileInView={{ opacity: 1, x: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.8 }} 
-            className="rounded-2xl bg-slate-800/70 p-8 border border-emerald-400/20 shadow-2xl"
-          >
-            <h3 className="text-3xl font-bold text-emerald-400">Connectons-nous</h3>
-            <p className="mt-3 text-lg text-slate-300">Vous avez un défi MES, un projet d'intégration ou vous recherchez une expertise Full-Stack industrielle ? Échangeons.</p>
+  initial={{ opacity: 0, x: -50 }} 
+  whileInView={{ opacity: 1, x: 0 }} 
+  viewport={{ once: true }} 
+  transition={{ duration: 0.8 }} 
+  className="rounded-2xl bg-slate-800/70 p-8 border border-emerald-400/20 shadow-2xl"
+>
+  <h3 className="text-3xl font-bold text-emerald-400">Connectons-nous</h3>
+  <p className="mt-3 text-lg text-slate-300">Vous avez un défi MES, un projet d'intégration ou vous recherchez une expertise Full-Stack industrielle ? Échangeons.</p>
 
-            <div className="mt-6 space-y-4 text-slate-200">
-              <div className="flex items-center gap-4 text-lg"><Mail size={20} className="text-sky-400" /> oswald.adinavo@gmail.com</div>
-              <div className="flex items-center gap-4 text-lg"><Linkedin size={20} className="text-sky-400" /> linkedin.com/in/Oswald ADINAVO</div>
-              <div className="flex items-center gap-4 text-lg"><Github size={20} className="text-sky-400" /> github.com/Oswald-LEXPERT</div>
-            </div>
+  <div className="mt-6 space-y-4 text-slate-200">
+    {/* Email cliquable */}
+    <a href="mailto:oswald.adinavo@gmail.com" className="flex items-center gap-4 text-lg hover:text-sky-400 transition group">
+      <Mail size={20} className="text-sky-400 group-hover:scale-110 transition" /> 
+      oswald.adinavo@gmail.com
+    </a>
 
-            <div className="mt-8">
-              <a href="mailto:oswald.adinavo@gmail.com" className="inline-flex items-center gap-3 rounded-full px-6 py-3 bg-emerald-500 text-slate-900 font-bold shadow-xl hover:bg-emerald-400 transition">
-                <Mail size={20} /> Envoyer un email
-              </a>
-            </div>
-          </motion.div>
+    {/* Téléphones cliquables */}
+    <div className="flex flex-col gap-3">
+      <a href="tel:+2290165040451" className="flex items-center gap-4 text-lg hover:text-emerald-400 transition group">
+        <Phone size={20} className="text-sky-400 group-hover:scale-110 transition" /> 
+        (+229) 01 65 04 04 51
+      </a>
+      <a href="tel:+2290197378470" className="flex items-center gap-4 text-lg ml-[36px] hover:text-emerald-400 transition group">
+        (+229) 01 97 37 84 70
+      </a>
+    </div>
+
+    {/* GitHub cliquable */}
+    <a 
+      href="https://github.com/Oswald-LEXPERT" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="flex items-center gap-4 text-lg hover:text-sky-400 transition group"
+    >
+      <Github size={20} className="text-sky-400 group-hover:scale-110 transition" /> 
+      github.com/Oswald-LEXPERT
+    </a>
+  </div>
+
+  <div className="mt-8">
+    <a href="mailto:oswald.adinavo@gmail.com" className="inline-flex items-center gap-3 rounded-full px-6 py-3 bg-emerald-500 text-slate-900 font-bold shadow-xl hover:bg-emerald-400 transition">
+      <Mail size={20} /> Envoyer un email
+    </a>
+  </div>
+</motion.div>
 
           {/* FORMULAIRE CORRIGÉ POUR ENVOI JSON */}
           <motion.form
