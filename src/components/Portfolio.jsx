@@ -268,7 +268,7 @@ export default function OswaldPortfolio() {
                            </div>
                          <div className="mt-5">
                              <div className="text-sm font-bold text-emerald-400">Mission & Vision</div>
-                             <div className="text-slate-200 mt-2 leading-relaxed">Je conçois des applications métier et assure le support opérationnel des systèmes shopfloor. J’optimise, corrige et fais évoluer ces solutions terrain afin de renforcer la performance industrielle et d’offrir aux utilisateurs une expérience fluide, fiable et adaptée à leurs besoins.</div>
+                             <div className="text-slate-200 mt-2 leading-relaxed">Architecte de solutions numériques pour l'industrie, ma mission est de stabiliser et d'optimiser l'écosystème shopfloor. J'allie expertise technique et support opérationnel pour transformer les contraintes du terrain en leviers de performance, avec une obsession : la fiabilité des systèmes et l'expérience utilisateur.</div>
                          </div>
                     </div>
                 </motion.div>
