@@ -1,7 +1,7 @@
-import React, { useState } from "react"; // ⬅️ AJOUT de useState pour la gestion du formulaire
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react"; // ⬅️ AJOUT de useState pour la gestion du formulaire
+import { motion, AnimatePresence } from "framer-motion";
 // Import des nouvelles icônes nécessaires pour la timeline
-import { Github, Linkedin, Phone, Mail, Download, Zap, Terminal, Code, Factory, Layers, Clock, Sparkles } from "lucide-react";
+import { Github, Linkedin, Phone, Mail, Download, Zap, Terminal, Code, Factory, Layers, Clock, Sparkles, ArrowUp } from "lucide-react";
 
 // Variantes d'animation pour une meilleure réutilisation
 const containerVariants = {
@@ -138,6 +138,22 @@ export default function OswaldPortfolio() {
   
   // 🚀 LOGIQUE DE GESTION DU FORMULAIRE FORMULAIRE
     const [status, setStatus] = useState('');
+
+  // 🚀 LOGIQUE POUR LE BOUTON "REMONTER"
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) setShowScrollTop(true);
+      else setShowScrollTop(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
     
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -208,6 +224,22 @@ export default function OswaldPortfolio() {
           </div>
         </nav>
       </header>
+
+      {/* BOUTON REMONTER (Flottant) */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-emerald-500 text-slate-900 shadow-2xl hover:bg-emerald-400 transition-colors"
+            aria-label="Retour en haut"
+          >
+            <ArrowUp size={24} />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* mobile CV button placed before hero (visible on mobile only) */}
 {!mobileMenuOpen && (
